@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .registration-container {
+            width: 400px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .registration-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .registration-container input[type="text"],
+        .registration-container input[type="email"],
+        .registration-container input[type="password"],
+        .registration-container input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .registration-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 3px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .registration-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .registration-container p {
+            text-align: center;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .registration-container a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .registration-container a:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="registration-container">
+        <h2>Register</h2>
+        <form id="registrationForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <div id="emailError" class="error"></div>
+            <input type="tel" id="phone" placeholder="Phone Number" pattern="[0-9]{10}" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            <div id="passwordError" class="error"></div>
+            <input type="submit" value="Register">
+        </form>
+        <p>Already registered? <a href="#">Login</a></p>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            // Email validation
+            var email = document.getElementById('email').value;
+            var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            var emailError = document.getElementById('emailError');
+            if (!email.match(emailPattern)) {
+                emailError.textContent = 'Please enter a valid email address.';
+                event.preventDefault();
+                return false;
+            } else {
+                emailError.textContent = '';
+            }
+
+            // Password match validation
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var passwordError = document.getElementById('passwordError');
+            if (password !== confirmPassword) {
+                passwordError.textContent = 'Passwords do not match.';
+                event.preventDefault();
+                return false;
+            } else {
+                passwordError.textContent = '';
+            }
+        });
+    </script>
+
+</body>
+</html>
